@@ -2,11 +2,19 @@ function handleSubmit(event) {
     event.preventDefault()
 
     // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    Client.checkForName(formText)
+    let formtext = document.getElementById('name').value;
 
     console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/test')
+    const textified = { formtext };
+
+    fetch('http://localhost:8080/usertext', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(textified)
+    })
     .then(res => {
         return res.json()
     })
