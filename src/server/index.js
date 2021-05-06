@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const fetch = require('node-fetch')
+const FormData = require('form-data')
 
 dotenv.config();
 
@@ -19,8 +20,9 @@ app.use(express.urlencoded({
 app.use(express.static('dist'))
 
 // designates what port the app will listen to for incoming requests
-app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
+const port = 8080;
+app.listen(port, function () {
+    console.log(`app listening on port: ${port}`);
 })
 
 app.get('/', function (req, res) {
@@ -29,11 +31,21 @@ app.get('/', function (req, res) {
 
 app.post('/usertext', (req, res) => {
     const api_key = process.env.API_KEY;
-    const txt = req.body.formtext;
+    const txt_val = req.body.formtext;
+    //try to console log something here like txt and see what comes out
+    const form = new FormData();
+    form.append("key", api_key);
+    form.append("txt", txt_val);
+    form.append("lang", en);
 
-    fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${api_key}&txt=${txt}&lang=en`, {method: 'POST'})
-    .then(response => response.json())
-    .then(data => res.send(data))
+    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", {
+        method: 'POST',
+        body: form
+    })
+    .then(response => ({
+        body: response.json()
+    }))
+    .then(({ body }) => res.send(body))
     .catch(error => console.log('error',error));
 
 });
