@@ -22,14 +22,14 @@ app.use(express.static('dist'))
 // designates what port the app will listen to for incoming requests
 const port = 8080;
 app.listen(port, function () {
-    console.log(`app listening on port: ${port}`);
+    console.log('app listening on port: %d', port);
 })
 
 app.get('/', function (req, res) {
     res.sendFile(path.resolve('dist/index.html'))
 })
 
-app.post('/usertext', (req, res) => {
+app.post('/usertext', async(req, res) => {
     const api_key = process.env.API_KEY;
     const txt_val = req.body.formtext;
     //try to console log something here like txt and see what comes out

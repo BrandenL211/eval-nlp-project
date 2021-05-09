@@ -5,7 +5,7 @@ function handleSubmit(event) {
     let formtext = document.getElementById('name').value;
 
     console.log("::: Form Submitted :::")
-    const textified = { formtext };
+   // const textified = { formtext };
 
     fetch('http://localhost:8080/usertext', {
         method: 'POST',
@@ -13,13 +13,14 @@ function handleSubmit(event) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(textified)
+        body: JSON.stringify({ formtext })
     })
     .then(res => {
-        return res.json()
+        console.log(res)
+         return res.json()
     })
     .then(function(data) {
-        document.getElementById('results').innerHTML = data.message
+        document.getElementById('results').innerHTML = data.model;
     })
 }
 
