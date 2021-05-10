@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
     res.sendFile(path.resolve('dist/index.html'))
 })
 
-app.post('/usertext', async(req, res) => {
+/*app.post('/usertext', async(req, res) => {
     
     const txt_val = req.body.formtext;
     //try to console log something here like txt and see what comes out
@@ -52,5 +52,14 @@ app.post('/usertext', async(req, res) => {
     .then(({ body }) => res.send(body))
     .catch(error => console.log('error',error));
 
-});
+});*/
 
+app.post('/usertext', async(req, res) => {
+    const txt = req.body.formText;
+    const lang = "en";
+  
+    const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${api_key}&txt=${txt}&lang=${lang}`)
+    .then(response => response.json())
+    .then(response => res.send(response))
+    .catch(error => console.log('error', error));
+  })
