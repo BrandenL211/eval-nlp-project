@@ -29,31 +29,6 @@ app.get('/', function (req, res) {
     res.sendFile(path.resolve('dist/index.html'))
 })
 
-/*app.post('/usertext', async(req, res) => {
-    
-    const txt_val = req.body.formText;
-    //try to console log something here like txt and see what comes out
-    console.log(txt_val);
-    const form = new FormData();
-    form.append("key", api_key);
-    form.append("txt", txt_val);
-    form.append("lang", en);
-
-    const requestOptions = {
-        method: 'POST',
-        body: form,
-        redirect: 'follow'
-    };
-
-    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
-    .then(response => ({
-        body: response.json()
-    }))
-    .then(({ body }) => res.send(body))
-    .catch(error => console.log('error',error));
-
-});*/
-
 app.post('/usertext', async(req, res) => {
     const txt = req.body.formText;
     const lang = "en";
