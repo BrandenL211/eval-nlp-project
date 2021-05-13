@@ -10,10 +10,10 @@ const FormData = require('form-data')
 dotenv.config();
 
 const api_key = process.env.API_KEY;
-const app = express()
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({
+const app = express();
+app.use(cors());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
     extended: false
 }))
 
@@ -31,7 +31,7 @@ app.get('/', function (req, res) {
 
 /*app.post('/usertext', async(req, res) => {
     
-    const txt_val = req.body.formtext;
+    const txt_val = req.body.formText;
     //try to console log something here like txt and see what comes out
     console.log(txt_val);
     const form = new FormData();
@@ -57,6 +57,7 @@ app.get('/', function (req, res) {
 app.post('/usertext', async(req, res) => {
     const txt = req.body.formText;
     const lang = "en";
+    console.log(txt);
   
     const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${api_key}&txt=${txt}&lang=${lang}`)
     .then(response => response.json())
