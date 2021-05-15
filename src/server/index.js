@@ -34,7 +34,7 @@ app.post('/usertext', async(req, res) => {
     const lang = "en";
     console.log(txt);
   
-    const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${api_key}&txt=${txt}&lang=${lang}`)
+    const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${api_key}&url=${txt}&lang=${lang}`)
     .then(response => response.json())
     .then(response => res.send(response))
     .catch(error => console.log('error', error));
