@@ -4,7 +4,7 @@
 In this project I built a web tool that allows users to run Natural Language Processing (NLP) on articles or blogs found on other websites. NLP is the ability of an application to understand the human language, written or oral.
 With the help of an external api called Aylien, the tool will help us classify the information available in the article, like whether the content is subjective (opinion) or objective (fact-based) and whether it is positive, neutral, or negative in tone.
 
-### How to run the Project
+## How to run the Project
 - To install packages run:
 <blockquote>
 <pre><code>  npm install
